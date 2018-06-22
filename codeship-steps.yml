@@ -1,0 +1,15 @@
+# codeship-steps.yml
+# – name: Your tests
+#   service: app
+#   command: tests.sh
+- type: parallel
+  steps:
+  – name: Push Image To IBM Bluemix Registry
+    service: app
+    type: push
+    image_name: registry.eu-de.bluemix.net/training-space/perfect_hello_node
+    registry: registry.eu-de.bluemix.net
+    dockercfg_service: dockercfg_generator
+  – name: Kubernetes Deployment
+    service: deployment
+    command: kubernetes.sh
