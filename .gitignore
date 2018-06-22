@@ -5,4 +5,4 @@ temp/
 coverage
 .env
 npm-debug.log
-
+codeship.aes
