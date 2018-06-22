@@ -1,17 +1,15 @@
-# codeship-services.yml
-app:
-  build:
-    image: registry.eu-de.bluemix.net/training-space/perfect_hello_node
-    path: .
+--- 
+app: 
+  build: 
     dockerfile_path: Dockerfile
-  volumes:
-    – ./deployment/:/deployment
-dockercfg_generator:
-  image: codeship/ibm-bluemix-dockercfg-generator
+    image: registry.eu-de.bluemix.net/training-space/perfect_hello_node
+    path: "."
+  volumes: "– ./deployment/:/deployment"
+deployment: 
+  encrypted_env_file: bluemix.env.encrypted
+  image: codeship/ibm-bluemix-deployment
+  volumes: "– ./deployment/:/deployment"
+dockercfg_generator: 
   add_docker: true
   encrypted_env_file: bluemix.env.encrypted
-deployment:
-  image: codeship/ibm-bluemix-deployment
-  encrypted_env_file: bluemix.env.encrypted
-  volumes:
-    – ./deployment/:/deployment
+  image: codeship/ibm-bluemix-dockercfg-generator
