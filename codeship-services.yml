@@ -1,16 +1,35 @@
---- 
-app: 
-  build: 
+base:
+  build:
+    image: codeship/ibm-bluemix-base
+    path: ./base
     dockerfile_path: Dockerfile
-    path: ./deployment
-    image: registry.eu-de.bluemix.net/training-space/perfect_hello_node
-    volumes: "– ./deployment/:/deployment"
-dockercfg_generator: 
+dockercfg_generator:
+  build:
+    image: codeship/ibm-bluemix-dockercfg-generator
+    path: ./dockercfg-generator
+    dockerfile_path: Dockerfile
   add_docker: true
   encrypted_env_file: bluemix.env.encrypted
+dockercfg_test:
+  build:
+    image: registry.eu-de.bluemix.net/training-space/perfect_hello_node
+    path: ./dockercfg-generator
+    dockerfile_path: Dockerfile.test
+dockercfg_test_generator:
   image: codeship/ibm-bluemix-dockercfg-generator
-deployment: 
+  add_docker: true
   encrypted_env_file: bluemix.env.encrypted
-  image: codeship/ibm-bluemix-deployment
-  volumes: 
-    - "./deployment/tests:/tests"
+deployment:
+  build:
+    image: codeship/ibm-bluemix-deployment
+    path: ./deployment
+    dockerfile_path: Dockerfile
+  environment:
+    - BLUEMIX_API_ENDPOINT=https://api.eu-de.bluemix.net
+    - BLUEMIX_CONTAINER_SERVICE_HOST=https://eu-central.containers.bluemix.net
+    - BLUEMIX_CONTAINER_SERVICE_CLUSTER_NAME=saudia_fra2_cs
+    - BLUEMIX_ORGANIZATION=bluemix-mfadin@sa.ibm.com
+    - BLUEMIX_SPACE=alnahdi
+  encrypted_env_file: bluemix.env.encrypted
+  volumes:
+    - ./deployment/tests:/tests
