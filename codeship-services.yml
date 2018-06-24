@@ -1,14 +1,14 @@
 --- 
 app: 
   build: 
-    dockerfile_path: Dockerfile
+    dockerfile_path: ./Dockerfile
     image: registry.eu-de.bluemix.net/training-space/perfect_hello_node
-    path: "."
-  volumes: "– ./deployment/:/deployment"
+    volumes: "– ./deployment/:/deployment"
 deployment: 
   encrypted_env_file: bluemix.env.encrypted
   image: codeship/ibm-bluemix-deployment
-  volumes: "– ./deployment/:/deployment"
+  volumes: 
+    - "./deployment/tests:/tests"
 dockercfg_generator: 
   add_docker: true
   encrypted_env_file: bluemix.env.encrypted
