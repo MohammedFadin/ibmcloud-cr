@@ -28,7 +28,7 @@ deployment:
     - BLUEMIX_API_ENDPOINT=https://api.eu-de.bluemix.net
     - BLUEMIX_CONTAINER_SERVICE_HOST=https://eu-central.containers.bluemix.net
     - BLUEMIX_CONTAINER_SERVICE_CLUSTER_NAME=saudia_fra2_cs
-    - BLUEMIX_ORGANIZATION=bluemix-mfadin@sa.ibm.com
+    - BLUEMIX_ORGANIZATION=mfadin@sa.ibm.com
     - BLUEMIX_SPACE=alnahdi
   encrypted_env_file: bluemix.env.encrypted
   volumes:
